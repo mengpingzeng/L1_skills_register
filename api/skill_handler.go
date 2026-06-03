@@ -351,6 +351,7 @@ func (h *Handler) handleSkillByID(w http.ResponseWriter, r *http.Request) {
 			ScriptsPath      string                 `json:"scripts_path,omitempty"`
 			TemplatesPath    string                 `json:"templates_path,omitempty"`
 			ExamplesPath     string                 `json:"examples_path,omitempty"`
+			Roles            string                 `json:"roles,omitempty"`
 		}{
 			SkillID: skillID,
 		}
@@ -375,6 +376,7 @@ func (h *Handler) handleSkillByID(w http.ResponseWriter, r *http.Request) {
 		dr.ScriptsPath = pkg.ScriptsPath
 		dr.TemplatesPath = pkg.TemplatesPath
 		dr.ExamplesPath = pkg.ExamplesPath
+		dr.Roles = pkg.Roles
 
 		writeJSON(w, http.StatusOK, dr)
 		return
@@ -402,6 +404,7 @@ func (h *Handler) handleSkillByID(w http.ResponseWriter, r *http.Request) {
 		"name":              pkg.Name,
 		"description":       pkg.Description,
 		"category":          pkg.Category,
+		"roles":             pkg.Roles,
 		"model_recommended": pkg.ModelRecommended,
 		"prompt_content":    pkg.PromptContent,
 		"output_schema":     pkg.OutputSchema,
