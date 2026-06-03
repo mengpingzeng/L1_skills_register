@@ -504,9 +504,13 @@ func (h *Handler) handleCoverRendered(w http.ResponseWriter, r *http.Request, sk
 	outputPath := filepath.Join(os.TempDir(), fmt.Sprintf("%s_rendered.png", skillID))
 	defer os.Remove(outputPath)
 
+	renderName := r.URL.Query().Get("name")
+	if renderName == "" {
+		renderName = pkg.Name
+	}
 	cmd := exec.Command(h.coverBin,
 		"-image", baseImagePath,
-		"-name", pkg.Name,
+		"-name", renderName,
 		"-writer", author,
 		"-out", outputPath,
 		"-fonts", h.fontsDir,
